@@ -2,14 +2,17 @@
   "name": "electron-practice",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prestart": "tsc && cp src/index.html dist/",
+    "start": "electron dist/main.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^11.2.3"
+    "electron": "^11.2.3",
+    "eslint": "^7.20.0",
+    "typescript": "^4.1.5"
   }
 }
