@@ -1,4 +1,4 @@
 import {app} from 'electron'
-import MainWindow from './MainWindow/MainWindow';
+import MainWindow from './MainWindow/MainWindow'
 
 MainWindow.start(app)

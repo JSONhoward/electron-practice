@@ -10,22 +10,32 @@ const defaultProps = {
 
 interface WindowProps {
     file: string,
-    settings: {
-        height: number,
-        width: number,
+    settings?: {
+        height?: number,
+        width?: number,
+        parent?: Electron.BrowserWindow,
+        frame?: boolean,
         webPreferences?: {
             nodeIntegration: boolean
         }
     }
 }
 
-export default class Window extends BrowserWindow {
-    constructor({file, ...settings}: WindowProps, devTools = true) {
-        super({...defaultProps, ...settings})
+export default class Window {
+    win: Electron.BrowserWindow
+    file: string
+    devTools: boolean
 
-        this.loadFile(file)
-        devTools && this.webContents.openDevTools()
-        this.once('ready-to-show', () => this.show())
+    constructor({file, ...settings}: WindowProps, devTools = true) {
+        this.win = new BrowserWindow({...defaultProps, ...settings})
+        this.file = file
+        this.devTools = devTools
+    }
+
+    create() {
+        this.win.loadFile(this.file)
+        this.devTools && this.win.webContents.openDevTools()
+        this.win.once('ready-to-show', () => this.win.show())
     }
 
 }
