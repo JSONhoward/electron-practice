@@ -15,7 +15,7 @@ export default class MainWindow {
 
     private static onWindowAllClosed(app: Electron.App) {
         if (process.platform !== 'darwin') {
-            app.quit();
+            app.quit()
         }
     }
 
@@ -25,7 +25,7 @@ export default class MainWindow {
 
     private static createWindow(mode = 'prod') {
         MainWindow.win = new BrowserWindow({...defaultProps})
-        MainWindow.win.loadFile('../views/main.html')
+        MainWindow.win.loadFile('../index.html')
         mode !== 'prod' && MainWindow.win.webContents.openDevTools()
         MainWindow.win.on('ready-to-show', () => MainWindow.win?.show())
         MainWindow.win.on('closed', MainWindow.onClose)

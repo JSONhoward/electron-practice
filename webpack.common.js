@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
@@ -7,15 +8,28 @@ module.exports = {
     target: 'electron-main',
     entry: {
         main: './src/main.ts',
-        index: './src/Views/Main/index.ts'
+        index: './src/Views/Main/index.ts',
+        child: './src/Views/Child/child.ts'
     },
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './src/Views/Main/main.html'),
-            filename: 'views/main.html',
+            template: path.resolve(__dirname, './src/Views/Main/index.html'),
+            filename: 'index.html',
             inject: true,
-            chunks: ['main']
+            chunks: ['index']
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, './src/Views/Child/child.html'),
+            filename: 'child.html',
+            inject: true,
+            chunks: ['child']
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, './src/Views/Child2/test.html'),
+            filename: 'test.html',
+            inject: true,
+            chunks: ['test']
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].[contenthash].css'
@@ -30,7 +44,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
             }
         ]
     },

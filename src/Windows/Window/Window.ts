@@ -3,8 +3,10 @@ import { BrowserWindow } from 'electron'
 const defaultProps = {
     height: 600,
     width: 800,
+    show: false,
     webPreferences: {
-        nodeIntegration: true
+        nodeIntegration: true,
+        contextIsolation: true
     }
 }
 
@@ -13,10 +15,12 @@ interface WindowProps {
     settings?: {
         height?: number,
         width?: number,
+        show?: boolean,
         parent?: Electron.BrowserWindow,
         frame?: boolean,
         webPreferences?: {
-            nodeIntegration: boolean
+            nodeIntegration?: boolean,
+            contextIsolation?: boolean
         }
     }
 }
@@ -35,7 +39,7 @@ export default class Window {
     create() {
         this.win.loadFile(this.file)
         this.devTools && this.win.webContents.openDevTools()
-        this.win.once('ready-to-show', () => this.win.show())
+        this.win.once('ready-to-show', this.win.show)
     }
 
 }
