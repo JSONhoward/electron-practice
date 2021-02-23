@@ -27,7 +27,7 @@ export default class Modal {
     file: string
     devTools: boolean
 
-    constructor({file, ...settings}: ModalProps, devTools = true) {
+    constructor({file, settings}: ModalProps, devTools = true) {
         this.modal = new BrowserWindow({...defaultProps, ...settings})
         this.file = file
         this.devTools = devTools

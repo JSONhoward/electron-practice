@@ -1,15 +1,10 @@
 import { app } from 'electron'
-import MainWindow from './Windows/MainWindow/MainWindow'
-import Window from './Windows/Window/Window'
+import MainWindow from './Views/MainWindow/MainWindow'
+import View from './Views/View/View'
 
 MainWindow.start(app)
 
-
 app.whenReady().then(() => {
-    const child = new Window({ file: '../test.html' })
-    const child2 = new Window({ file: '../test.html' })
-    const child3 = new Window({ file: '../test.html' })
-    child.create()
-    child2.create()
-    child3.create()
+    const view = new View({file: ''})
+    view.create(MainWindow.win!)
 })
