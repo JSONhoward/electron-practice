@@ -13,30 +13,39 @@ const defaultProps = {
 interface ViewProps {
     file: string,
     settings?: {
-        x: number,
-        y: number,
-        height: number,
-        width: number,
-        webPreferences: {
+        x?: number,
+        y?: number,
+        height?: number,
+        width?: number,
+        webPreferences?: {
             contextIsolation: boolean
         }
+    },
+    parentBounds?: {
+        x?: number,
+        y?: number,
+        height?: number,
+        width?: number
     }
 }
 
 export default class View {
     view: Electron.BrowserView
     file: string
-    settings: typeof defaultProps | undefined
+    settings: ViewProps['settings'] | undefined
+    parentBounds: ViewProps['parentBounds'] | undefined
 
-    constructor({ file, settings }: ViewProps) {
+    constructor({ file, settings, parentBounds }: ViewProps) {
         this.view = new BrowserView()
         this.file = file
         this.settings = settings
+        this.parentBounds = parentBounds
     }
 
     create(parent: Electron.BrowserWindow) {
         parent.setBrowserView(this.view)
-        this.view.setBounds({ ...defaultProps, ...this.settings })
-        this.view.webContents.loadURL('https://www.google.com')
+        this.view.setBounds({ ...defaultProps, ...this.settings, ...this.parentBounds})
+        this.view.setAutoResize({height: true, width: false, vertical: true, horizontal: false})
+        this.view.webContents.loadFile(this.file)
     }
 }

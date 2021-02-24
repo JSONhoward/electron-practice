@@ -8,8 +8,8 @@ module.exports = {
     target: 'electron-main',
     entry: {
         main: './src/main.ts',
-        index: './src/Views/Main/index.ts',
-        child: './src/Views/Child/child.ts'
+        index: './src/Components/Main/index.ts',
+        child: './src/Components/Child/child.ts'
     },
     mode: 'development',
     devtool: 'inline-source-map',
