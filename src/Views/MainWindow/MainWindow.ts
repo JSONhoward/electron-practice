@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron'
+import { BrowserWindow, ipcMain } from 'electron'
 
 const defaultProps = {
     height: 600,
@@ -11,34 +11,47 @@ const defaultProps = {
 }
 
 export default class MainWindow {
-    static win: Electron.BrowserWindow | null
+    window: Electron.BrowserWindow | null = null
+    App: Electron.App
 
-    private static onWindowAllClosed(app: Electron.App) {
+    constructor(app: Electron.App) {
+        this.App = app
+    }
+
+    private onWindowAllClosed() {
         if (process.platform !== 'darwin') {
-            app.quit()
+            this.App.quit()
         }
     }
 
-    private static onClose() {
-        MainWindow.win = null
+    private onClose() {
+        this.window = null
     }
 
-    private static createWindow(mode = 'prod') {
-        MainWindow.win = new BrowserWindow({...defaultProps})
-        MainWindow.win.loadFile('../index.html')
-        mode !== 'prod' && MainWindow.win.webContents.openDevTools()
-        MainWindow.win.on('ready-to-show', () => MainWindow.win?.show())
-        MainWindow.win.on('closed', MainWindow.onClose)
+    private createWindow(mode: string) {
+        this.window = new BrowserWindow({ ...defaultProps })
+        this.window.loadFile('../index.html')
+        mode !== 'prod' && this.window.webContents.openDevTools()
+        this.window.on('ready-to-show', () => this.window?.show())
+        this.window.on('closed', this.onClose)
     }
 
-    static start(app: Electron.App, mode = 'dev') {
-        app.whenReady().then(() => {
-            MainWindow.createWindow(mode)
+    private messaging() {
+        ipcMain.on('test-message', (event, arg) => {
+            console.log(arg)
+            event.reply('test-message-reply', 'pong')
         })
-        app.on('window-all-closed', MainWindow.onWindowAllClosed)
-        app.on('activate', () => {
+    }
+
+    async start(mode = 'dev') {
+        await this.App.whenReady()
+
+        this.createWindow(mode)
+        this.messaging()
+        this.App.on('window-all-closed', this.onWindowAllClosed)
+        this.App.on('activate', () => {
             if (BrowserWindow.getAllWindows.length === 0) {
-                MainWindow.createWindow(mode)
+                this.createWindow(mode)
             }
         })
     }
