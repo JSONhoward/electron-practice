@@ -9,8 +9,5 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-}
-
-body {
-    background-color: blue;
+    border-right: 1px solid black;
 }

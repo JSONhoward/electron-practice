@@ -1,6 +1,7 @@
 import { BrowserView } from 'electron'
 
 const defaultProps = {
+    backgroundColor: '#2d2d2d',
     webPreferences: {
         nodeIntegration: true,
         contextIsolation: false

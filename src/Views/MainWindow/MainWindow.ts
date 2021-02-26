@@ -4,6 +4,7 @@ const defaultProps = {
     height: 600,
     width: 800,
     show: false,
+    backgroundColor: '#2d2d2d',
     webPreferences: {
         nodeIntegration: true,
         contextIsolation: false

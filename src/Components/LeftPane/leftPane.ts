@@ -1,5 +1,5 @@
 import {ipcRenderer} from 'electron'
-import './child.css'
+import './leftPane.css'
 
 const button = document.getElementById('button')
 const div = document.getElementById('child')

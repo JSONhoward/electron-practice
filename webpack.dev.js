@@ -9,7 +9,7 @@ module.exports = {
     entry: {
         main: './src/main.ts',
         index: './src/Components/Main/index.ts',
-        child: './src/Components/Child/child.ts'
+        leftPane: './src/Components/LeftPane/leftPane.ts'
     },
     mode: 'development',
     devtool: 'inline-source-map',
@@ -22,10 +22,10 @@ module.exports = {
             chunks: ['index']
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './src/Components/Child/child.html'),
-            filename: 'child.html',
+            template: path.resolve(__dirname, './src/Components/LeftPane/leftPane.html'),
+            filename: 'leftPane.html',
             inject: true,
-            chunks: ['child']
+            chunks: ['leftPane']
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].[contenthash].css'
