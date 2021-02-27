@@ -1,7 +1,7 @@
 {
   "name": "electron-practice",
   "version": "1.0.0",
-  "description": "",
+  "description": "electron practice",
   "main": "dist/js/main.js",
   "scripts": {
     "watch": "nodemon --exec && npm start",
@@ -12,13 +12,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.13.1",
-    "@babel/preset-env": "^7.13.5",
-    "@babel/preset-react": "^7.12.13",
-    "@babel/preset-typescript": "^7.13.0",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
-    "bable-loader": "0.0.1-security",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.2",
     "electron": "^11.2.3",

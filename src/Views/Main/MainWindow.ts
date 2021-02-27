@@ -1,4 +1,5 @@
 import { BrowserWindow, ipcMain } from 'electron'
+import fs from 'fs'
 
 const defaultProps = {
     height: 600,

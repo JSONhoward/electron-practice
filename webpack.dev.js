@@ -9,7 +9,6 @@ module.exports = {
     entry: {
         main: './src/main.ts',
         index: './src/Components/Main/index.ts',
-        leftPane: './src/Components/LeftPane/leftPane.ts'
     },
     mode: 'development',
     devtool: 'inline-source-map',
@@ -20,12 +19,6 @@ module.exports = {
             filename: 'index.html',
             inject: true,
             chunks: ['index']
-        }),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './src/Components/LeftPane/leftPane.html'),
-            filename: 'leftPane.html',
-            inject: true,
-            chunks: ['leftPane']
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].[contenthash].css'
