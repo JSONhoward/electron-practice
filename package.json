@@ -5,7 +5,7 @@
   "main": "dist/js/main.js",
   "scripts": {
     "watch": "nodemon --exec && npm start",
-    "prestart": "webpack --config webpack.dev.js",
+    "prestart": "webpack --config webpack.dev.js --watch",
     "start": "electron dist/js/main.js"
   },
   "keywords": [],
@@ -17,6 +17,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.2",
     "electron": "^11.2.3",
+    "electron-reloader": "^1.2.0",
     "eslint": "^7.20.0",
     "html-webpack-plugin": "^5.2.0",
     "mini-css-extract-plugin": "^1.3.8",
@@ -27,6 +28,7 @@
     "webpack": "^5.23.0",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2",
+    "webpack-electron-reload": "^1.0.1",
     "webpack-merge": "^5.7.3"
   }
 }

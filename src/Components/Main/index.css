@@ -1,3 +1,5 @@
+@import '../NameList/name-list.css';
+
 * {
     padding: 0;
     margin: 0;
@@ -6,7 +8,7 @@
 
 #leftPane {
     min-height: 100vh;
-    width: 200px;
+    width: 150px;
     border-right: 1px solid black;
-    background-color: red;
+    background-color: #202020;
 }
