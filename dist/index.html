@@ -4,14 +4,23 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 		<title>Main Window</title>
-	<script defer src="js/index.js"></script><link href="css/index.8b23772496dd1c853a5b.css" rel="stylesheet"></head>
+	<script defer src="js/index.js"></script><link href="css/index.dc995be89532a100a14b.css" rel="stylesheet"></head>
 	<body>
-
-		<div id="leftPane">
-			<ul id="names">
-			</ul>
+		<div id="main">
+			<div id="task-bar">
+				<ul id="tasks">
+					<li class="material-icons active-task">account_circle</li>
+					<li class="material-icons not-active-task">apartment</li>
+					<li class="material-icons not-active-task">night_shelter</li>
+				</ul>
+			</div>
+			<div id="name-list">
+				<ul id="names"></ul>
+			</div>
+			<div id="right-pane"></div>
 		</div>
-		<div id="rightPane"></div>
 	</body>
 </html>

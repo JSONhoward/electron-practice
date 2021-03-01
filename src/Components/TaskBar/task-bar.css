@@ -1,0 +1,26 @@
+#tasks {
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+}
+
+#tasks li {
+	display: list-item;
+	text-align: center;
+	font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+#tasks li:hover {
+    font-weight: bold;
+}
+
+.not-active-task {
+    opacity: .5;
+}
+
+.active-task {
+    font-weight: bold;
+    opacity: 1;
+}

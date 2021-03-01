@@ -1,4 +1,5 @@
 @import '../NameList/name-list.css';
+@import '../TaskBar/task-bar.css';
 
 * {
     padding: 0;
@@ -6,9 +7,21 @@
     box-sizing: border-box;
 }
 
-#leftPane {
+#main {
+    display: flex;
+    flex-direction: row;
+}
+
+#name-list {
     min-height: 100vh;
     width: 150px;
+    border-right: 1px solid black;
+    background-color: #202020;
+}
+
+#task-bar {
+    height: 100vh;
+    width:  50px;
     border-right: 1px solid black;
     background-color: #202020;
 }

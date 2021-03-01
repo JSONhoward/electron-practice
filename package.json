@@ -30,5 +30,8 @@
     "webpack-dev-server": "^3.11.2",
     "webpack-electron-reload": "^1.0.1",
     "webpack-merge": "^5.7.3"
+  },
+  "dependencies": {
+    "material-design-icons": "^3.0.1"
   }
 }

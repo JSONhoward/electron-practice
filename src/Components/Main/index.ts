@@ -1,8 +1,10 @@
 import './index.css'
-import { getNames } from '../NameList/name-list';
+import { fillNames, nameSelectionActiveToggle, getNames } from '../NameList/name-list'
+import { taskSelectionActiveToggle } from '../TaskBar/task-bar'
 
-const nameList = document.getElementById('names')
-
-const fakeNames = [{first: 'John', last: 'Doe'}, {first: 'Howard', last: 'Haws'}, {first: 'Maggie', last: 'Lane'}]
-
-getNames(nameList, fakeNames)
+getNames
+    .then(names => fillNames(document.getElementById('names'), names))
+    .then(() => {
+        nameSelectionActiveToggle()
+        taskSelectionActiveToggle()
+    })
