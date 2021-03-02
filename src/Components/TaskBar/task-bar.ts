@@ -13,3 +13,18 @@ export const taskSelectionActiveToggle = () => {
         })
     })
 }
+
+export const toggleNameList = () => {
+    document.getElementById('tasks')?.addEventListener('click', (e: MouseEvent | KeyboardEvent) => {
+        const names = document.getElementById('name-list')
+        const target = e.target as HTMLElement
+
+        if (target.id === 'task-names' && names!.style.display !== 'flex') {
+            names!.style.display = 'flex'
+        } else if(target.id === 'tasks' && names!.style.display === 'flex') {
+            names!.style.display = 'flex'
+        }else {
+            names!.style.display = 'none'
+        }
+    })
+}

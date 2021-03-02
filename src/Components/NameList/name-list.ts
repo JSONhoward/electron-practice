@@ -1,10 +1,3 @@
-//! fake api call for names
-export const getNames = new Promise<any[]>((resolve) => {
-    setTimeout(() => {
-        resolve([{ id: 1, first: 'John', last: 'Doe' }, { id: 2, first: 'Howard', last: 'Haws' }, { id: 3, first: 'Maggie', last: 'Lane' }])
-    }, 2000)
-})
-
 export const fillNames = async (element: HTMLElement | null, names: any[]) => {
     if (!element || names.length === 0) return null
     names.forEach(name => {
@@ -18,16 +11,16 @@ export const fillNames = async (element: HTMLElement | null, names: any[]) => {
 }
 
 export const nameSelectionActiveToggle = () => {
-    const listItems = document.querySelectorAll('#names li')
+    const names = document.querySelectorAll('#names li')
 
-    listItems.forEach(item => {
-        item.addEventListener('click', () => {
-            if (!item.classList.contains('active-name')) {
-                listItems.forEach(item2 => {
-                    item2.classList.remove('active-name')
-                    item2.classList.add('not-active-name')
+    names.forEach(name => {
+        name.addEventListener('click', () => {
+            if (!name.classList.contains('active-name')) {
+                names.forEach(name2 => {
+                    name2.classList.remove('active-name')
+                    name2.classList.add('not-active-name')
                 })
-                item.classList.add('active-name')
+                name.classList.add('active-name')
             }
         })
     })
