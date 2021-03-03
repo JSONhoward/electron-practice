@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://electron-practice/./src/index.css"],"names":[],"mappings":"AAAA;IACI,UAAU;IACV,SAAS;IACT,sBAAsB;AAC1B,C","file":"css/main.838c726d009ea91565c2.css","sourcesContent":["* {\n    padding: 0;\n    margin: 0;\n    box-sizing: border-box;\n}"],"sourceRoot":""}

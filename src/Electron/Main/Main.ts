@@ -1,4 +1,5 @@
 import { BrowserWindow, ipcMain } from 'electron'
+import isDev from 'electron-is-dev'
 
 const defaultProps = {
     height: 600,
@@ -31,7 +32,7 @@ export default class MainWindow {
 
     private createWindow(mode: string) {
         this.window = new BrowserWindow({ ...defaultProps })
-        this.window.loadFile('../index.html')
+        this.window.loadURL(isDev ? 'http://localhost:9000/' : `file://${this.App.getAppPath()}/index.html`)
         mode !== 'prod' && this.window.webContents.openDevTools()
         this.window.on('ready-to-show', () => this.window?.show())
         this.window.on('closed', this.onClose)

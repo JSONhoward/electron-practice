@@ -1,5 +1,5 @@
 import { app } from 'electron'
-import MainWindow from './Utils/Views/Main/Main'
+import MainWindow from './Electron/Main/Main'
 
 const MAIN = new MainWindow(app)
 MAIN.start('dev')
