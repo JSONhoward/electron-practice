@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyledTaskbar, TasksLi } from './Taskbar.styles'
+import { FaAddressBook, FaBuilding, FaHospitalAlt } from 'react-icons/fa'
+import { tasks } from './Taskbar.utils'
 
 const Taskbar = () => {
+    const [activeTask, setActiveTask] = useState({...tasks, 'clients': true})
+
+    const makeActive = (e: React.MouseEvent) => {
+        const key = e.currentTarget.id
+
+        key in tasks && setActiveTask({...tasks, [key]: true})
+    }
 
     return (
-        <StyledTaskbar>
-            <TasksLi>Clients</TasksLi>
-            <TasksLi>Apartments</TasksLi>
-            <TasksLi>AFH's</TasksLi>
+        <StyledTaskbar >
+            <TasksLi onClick={makeActive} active={activeTask.clients} id={'clients'}><FaAddressBook /></TasksLi>
+            <TasksLi onClick={makeActive} active={activeTask.housing} id={'housing'}><FaBuilding /></TasksLi>
+            <TasksLi onClick={makeActive} active={activeTask.afh} id={'afh'}><FaHospitalAlt /></TasksLi>
         </StyledTaskbar>
     )
 }

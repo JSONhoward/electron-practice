@@ -10,13 +10,14 @@ list-style-type: none;
 flex-direction: column;
 `
 
-export const TasksLi = styled('li')`
+export const TasksLi = styled('li')<{active: boolean}>`
 display: list-item;
 text-align: center;
 font-size: 2rem;
 color: #fff;
+opacity: ${({active}) => active ? 1 : .1};
 cursor: pointer;
-margin: .5rem 0;
+margin: 1rem 0;
 
 &:hover {
     font-weight: bold;
