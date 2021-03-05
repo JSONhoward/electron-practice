@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import { getNames, Names } from '../../Utils/mocks'
+import * as React from 'react'
+
+import { RootState } from '@/Store'
+import { Names } from '@/Utils/mocks'
+import {useSelector} from 'react-redux'
+
 import { StyledNameList, NamesLi } from './NameList.styles'
 
 const NameList = () => {
-    const [names, setNames] = useState<Names[]>([])
+    const names = useSelector((state: RootState) => state.clients)
 
-    useEffect(() => {
-        getNames.then((names: Names[]) => setNames(names))
-    }, [])
-
-    const nameList = names.map(name => {
+    const nameList = names.map((name: Names) => {
         return (
             <NamesLi key={name.id}>{name.last}, {name.first}</NamesLi>
         )
     })
 
     return (
-        <StyledNameList>
+        <StyledNameList onClick={() => console.log(names)}>
             {nameList}
         </StyledNameList>
     )

@@ -9,7 +9,7 @@ const Taskbar = () => {
     const makeActive = (e: React.MouseEvent) => {
         const key = e.currentTarget.id
 
-        key in tasks && setActiveTask({...tasks, [key]: true})
+        Object.hasOwnProperty.call(tasks,key) && setActiveTask({...tasks, [key]: true})
     }
 
     return (
