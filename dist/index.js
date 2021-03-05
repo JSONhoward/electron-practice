@@ -43235,8 +43235,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var React = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-var Store_1 = __importStar(__webpack_require__(/*! ./Store */ "./src/Store/index.ts"));
+var Store_1 = __webpack_require__(/*! ./Store */ "./src/Store/index.ts");
 var NameList_1 = __importDefault(__webpack_require__(/*! ./Components/NameList/NameList */ "./src/Components/NameList/NameList.tsx"));
 var Taskbar_1 = __importDefault(__webpack_require__(/*! ./Components/TaskBar/Taskbar */ "./src/Components/TaskBar/Taskbar.tsx"));
 var App_styles_1 = __webpack_require__(/*! ./App.styles */ "./src/App.styles.ts");
@@ -43247,10 +43246,9 @@ var App = function () {
     React.useEffect(function () {
         mocks_1.getNames.then(function (names) { return dispatch(clientSlice_1.add(names)); });
     }, []);
-    return (React.createElement(react_redux_1.Provider, { store: Store_1.default },
-        React.createElement(App_styles_1.StyledApp, null,
-            React.createElement(Taskbar_1.default, null),
-            React.createElement(NameList_1.default, null))));
+    return (React.createElement(App_styles_1.StyledApp, null,
+        React.createElement(Taskbar_1.default, null),
+        React.createElement(NameList_1.default, null)));
 };
 exports.default = App;
 
@@ -43321,7 +43319,7 @@ var NameList = function () {
             ", ",
             name.first));
     });
-    return (React.createElement(NameList_styles_1.StyledNameList, null, nameList));
+    return (React.createElement(NameList_styles_1.StyledNameList, { onClick: function () { return console.log(names); } }, nameList));
 };
 exports.default = NameList;
 
@@ -43490,11 +43488,10 @@ exports.useAppDispatch = void 0;
 var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 var clientSlice_1 = __importDefault(__webpack_require__(/*! ./Slices/clientSlice */ "./src/Store/Slices/clientSlice.ts"));
-var rootReducer = toolkit_1.combineReducers({
-    clients: clientSlice_1.default
-});
 var store = toolkit_1.configureStore({
-    reducer: rootReducer
+    reducer: {
+        clients: clientSlice_1.default
+    }
 });
 exports.default = store;
 var useAppDispatch = function () { return react_redux_1.useDispatch(); };
@@ -43563,7 +43560,10 @@ var React = __importStar(__webpack_require__(/*! react */ "./node_modules/react/
 var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
 __webpack_require__(/*! ./index.css */ "./src/index.css");
 var App_1 = __importDefault(__webpack_require__(/*! @/App */ "./src/App.tsx"));
-react_dom_1.default.render(React.createElement(App_1.default, null), document.getElementById('root'));
+var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+var Store_1 = __importDefault(__webpack_require__(/*! ./Store */ "./src/Store/index.ts"));
+react_dom_1.default.render(React.createElement(react_redux_1.Provider, { store: Store_1.default },
+    React.createElement(App_1.default, null)), document.getElementById('root'));
 
 
 /***/ })
