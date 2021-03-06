@@ -19,6 +19,7 @@ export const clientSlice = createSlice({
         },
         remove: (state, action: PayloadAction<Names>) => {
             state = state.filter(name => name !== action.payload)
+            return state
         }
     }
 })
