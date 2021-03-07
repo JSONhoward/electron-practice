@@ -43362,76 +43362,32 @@ var templateObject_1, templateObject_2;
 
 "use strict";
 
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-var Taskbar_styles_1 = __webpack_require__(/*! ./Taskbar.styles */ "./src/Components/TaskBar/Taskbar.styles.ts");
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 var fa_1 = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
-var Taskbar_utils_1 = __webpack_require__(/*! ./Taskbar.utils */ "./src/Components/TaskBar/Taskbar.utils.ts");
+var Store_1 = __webpack_require__(/*! @/Store */ "./src/Store/index.ts");
+var Taskbar_styles_1 = __webpack_require__(/*! ./Taskbar.styles */ "./src/Components/TaskBar/Taskbar.styles.ts");
+var taskSlice_1 = __webpack_require__(/*! @/Store/Slices/taskSlice */ "./src/Store/Slices/taskSlice.ts");
 var Taskbar = function () {
-    var _a = react_1.useState(__assign(__assign({}, Taskbar_utils_1.tasks), { 'clients': true })), activeTask = _a[0], setActiveTask = _a[1];
+    var dispatch = Store_1.useAppDispatch();
+    var tasks = react_redux_1.useSelector(function (state) { return state; }).tasks;
     var makeActive = function (e) {
-        var _a;
         var key = e.currentTarget.id;
-        Object.hasOwnProperty.call(Taskbar_utils_1.tasks, key) && setActiveTask(__assign(__assign({}, Taskbar_utils_1.tasks), (_a = {}, _a[key] = true, _a)));
+        dispatch(taskSlice_1.toggle(key));
     };
     return (react_1.default.createElement(Taskbar_styles_1.StyledTaskbar, null,
-        react_1.default.createElement(Taskbar_styles_1.TasksLi, { onClick: makeActive, active: activeTask.clients, id: 'clients' },
+        react_1.default.createElement(Taskbar_styles_1.TasksLi, { onClick: makeActive, active: tasks.clients, id: 'clients' },
             react_1.default.createElement(fa_1.FaAddressBook, null)),
-        react_1.default.createElement(Taskbar_styles_1.TasksLi, { onClick: makeActive, active: activeTask.housing, id: 'housing' },
+        react_1.default.createElement(Taskbar_styles_1.TasksLi, { onClick: makeActive, active: tasks.housing, id: 'housing' },
             react_1.default.createElement(fa_1.FaBuilding, null)),
-        react_1.default.createElement(Taskbar_styles_1.TasksLi, { onClick: makeActive, active: activeTask.afh, id: 'afh' },
+        react_1.default.createElement(Taskbar_styles_1.TasksLi, { onClick: makeActive, active: tasks.afh, id: 'afh' },
             react_1.default.createElement(fa_1.FaHospitalAlt, null))));
 };
 exports.default = Taskbar;
-
-
-/***/ }),
-
-/***/ "./src/Components/TaskBar/Taskbar.utils.ts":
-/*!*************************************************!*\
-  !*** ./src/Components/TaskBar/Taskbar.utils.ts ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.tasks = void 0;
-exports.tasks = {
-    'clients': false,
-    'housing': false,
-    'afh': false
-};
 
 
 /***/ }),
@@ -43440,10 +43396,17 @@ exports.tasks = {
 /*!*****************************************!*\
   !*** ./src/Store/Slices/clientSlice.ts ***!
   \*****************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.remove = exports.add = exports.clientSlice = void 0;
 var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
@@ -43457,16 +43420,62 @@ exports.clientSlice = toolkit_1.createSlice({
                 state = state.concat(action.payload);
             }
             else {
-                state.push(action.payload);
+                state = __spreadArrays(state, [action.payload]);
             }
+            return state;
         },
         remove: function (state, action) {
             state = state.filter(function (name) { return name !== action.payload; });
+            return state;
         }
     }
 });
 var actions = exports.clientSlice.actions, reducer = exports.clientSlice.reducer;
 exports.add = actions.add, exports.remove = actions.remove;
+exports.default = reducer;
+
+
+/***/ }),
+
+/***/ "./src/Store/Slices/taskSlice.ts":
+/*!***************************************!*\
+  !*** ./src/Store/Slices/taskSlice.ts ***!
+  \***************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.toggle = exports.taskSlice = void 0;
+var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+var initialState = {
+    'clients': false,
+    'housing': false,
+    'afh': false
+};
+exports.taskSlice = toolkit_1.createSlice({
+    name: 'tasks',
+    initialState: initialState,
+    reducers: {
+        toggle: function (state, action) {
+            var _a;
+            state = __assign(__assign({}, initialState), (_a = {}, _a[action.payload] = true, _a));
+        }
+    },
+});
+var reducer = exports.taskSlice.reducer, actions = exports.taskSlice.actions;
+exports.toggle = actions.toggle;
 exports.default = reducer;
 
 
@@ -43488,9 +43497,11 @@ exports.useAppDispatch = void 0;
 var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 var clientSlice_1 = __importDefault(__webpack_require__(/*! ./Slices/clientSlice */ "./src/Store/Slices/clientSlice.ts"));
+var taskSlice_1 = __importDefault(__webpack_require__(/*! ./Slices/taskSlice */ "./src/Store/Slices/taskSlice.ts"));
 var store = toolkit_1.configureStore({
     reducer: {
-        clients: clientSlice_1.default
+        clients: clientSlice_1.default,
+        tasks: taskSlice_1.default
     }
 });
 exports.default = store;

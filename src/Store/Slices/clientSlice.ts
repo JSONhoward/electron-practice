@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Names } from '../../Utils/mocks'
 
-type SliceState = Names[]
+type ClientsSliceState = Names[]
 
-const initialState: SliceState = []
+const initialState: ClientsSliceState = []
 
 export const clientSlice = createSlice({
     name: 'client',
-    initialState: initialState,
+    initialState,
     reducers: {
         add: (state, action: PayloadAction<Names | Names[]>) => {
             if (Array.isArray(action.payload)) {

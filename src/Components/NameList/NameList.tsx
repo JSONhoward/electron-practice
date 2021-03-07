@@ -16,7 +16,7 @@ const NameList = () => {
     })
 
     return (
-        <StyledNameList onClick={() => console.log(names)}>
+        <StyledNameList>
             {nameList}
         </StyledNameList>
     )
