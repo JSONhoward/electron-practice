@@ -30,10 +30,10 @@ export default class MainWindow {
         this.window = null
     }
 
-    private createWindow(mode: string) {
+    private createWindow() {
         this.window = new BrowserWindow({ ...defaultProps })
         this.window.loadURL(isDev ? 'http://localhost:9000/' : `file://${this.App.getAppPath()}/index.html`)
-        mode !== 'prod' && this.window.webContents.openDevTools()
+        isDev && this.window.webContents.openDevTools()
         this.window.on('ready-to-show', () => this.window?.show())
         this.window.on('closed', this.onClose)
     }
@@ -45,15 +45,15 @@ export default class MainWindow {
         })
     }
 
-    async start(mode = 'dev') {
+    async start() {
         await this.App.whenReady()
 
-        this.createWindow(mode)
+        this.createWindow()
         this.messaging()
         this.App.on('window-all-closed', this.onWindowAllClosed)
         this.App.on('activate', () => {
             if (BrowserWindow.getAllWindows.length === 0) {
-                this.createWindow(mode)
+                this.createWindow()
             }
         })
     }
