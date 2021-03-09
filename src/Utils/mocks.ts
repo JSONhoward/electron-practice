@@ -4,7 +4,13 @@ export type Names = {
     last: string
 }
 
-type Apartments = {
+export type Apartments = {
+    id: number,
+    name: string
+}
+
+export type AFHs = {
+    id: number,
     name: string
 }
 
@@ -17,6 +23,13 @@ export const getNames = new Promise<Names[]>((resolve) => {
 //! fake api call for apartments
 export const getApartments = new Promise<Apartments[]>((resolve) => {
     setTimeout(() => {
-        resolve([{name: 'Jay\'s Place'}, {name: 'Evergreen Place'}, {name: 'Senior Villa'}])
+        resolve([{id: 1, name: 'Jay\'s Place'}, {id: 2, name: 'Evergreen Place'}, {id: 3, name: 'Senior Villa'}])
+    }, 2000)
+})
+
+//! fake api call for AFHs
+export const getAFHs = new Promise<AFHs[]>((resolve) => {
+    setTimeout(() => {
+        resolve([{id: 1, name: 'Allegre Villa'}, {id: 2, name: 'The Boardwalk'}, {id: 3, name: 'Hidden Firs'}])
     }, 2000)
 })

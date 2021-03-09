@@ -4,8 +4,10 @@ import { RootState, useAppDispatch } from './Store'
 import NameList from './Components/NameList/NameList'
 import Taskbar from './Components/TaskBar/Taskbar'
 import { StyledApp } from './App.styles'
-import { getNames, Names } from './Utils/mocks'
-import { add } from './Store/Slices/clientSlice'
+import { AFHs, Apartments, getAFHs, getApartments, getNames, Names } from './Utils/mocks'
+import { add as clientAdd } from './Store/Slices/clientSlice'
+import { add as apartmentAdd } from './Store/Slices/apartmentSlice'
+import { add as afhAdd } from './Store/Slices/afhSlice'
 import { useSelector } from 'react-redux'
 
 
@@ -14,8 +16,18 @@ const App = () => {
     const { tasks } = useSelector((state: RootState) => state)
 
     React.useEffect(() => {
-        getNames.then((names: Names[]) => dispatch(add(names)))
+        getNames.then((names: Names[]) => dispatch(clientAdd(names)))
     }, [])
+
+    React.useEffect(() => {
+        getApartments.then((apartments: Apartments[]) => dispatch(apartmentAdd(apartments)))
+    }, [])
+
+    React.useEffect(() => {
+        getAFHs.then((AFHs: AFHs[]) => dispatch(afhAdd(AFHs)))
+    }, [])
+
+
 
     return (
         <StyledApp>
