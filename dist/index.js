@@ -43241,16 +43241,120 @@ var Taskbar_1 = __importDefault(__webpack_require__(/*! ./Components/TaskBar/Tas
 var App_styles_1 = __webpack_require__(/*! ./App.styles */ "./src/App.styles.ts");
 var mocks_1 = __webpack_require__(/*! ./Utils/mocks */ "./src/Utils/mocks.ts");
 var clientSlice_1 = __webpack_require__(/*! ./Store/Slices/clientSlice */ "./src/Store/Slices/clientSlice.ts");
+var apartmentSlice_1 = __webpack_require__(/*! ./Store/Slices/apartmentSlice */ "./src/Store/Slices/apartmentSlice.ts");
+var afhSlice_1 = __webpack_require__(/*! ./Store/Slices/afhSlice */ "./src/Store/Slices/afhSlice.ts");
+var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+var Apartments_1 = __importDefault(__webpack_require__(/*! ./Components/Apartments/Apartments */ "./src/Components/Apartments/Apartments.tsx"));
+var AFH_1 = __importDefault(__webpack_require__(/*! ./Components/AFH/AFH */ "./src/Components/AFH/AFH.tsx"));
 var App = function () {
     var dispatch = Store_1.useAppDispatch();
+    var tasks = react_redux_1.useSelector(function (state) { return state; }).tasks;
     React.useEffect(function () {
         mocks_1.getNames.then(function (names) { return dispatch(clientSlice_1.add(names)); });
     }, []);
+    React.useEffect(function () {
+        mocks_1.getApartments.then(function (apartments) { return dispatch(apartmentSlice_1.add(apartments)); });
+    }, []);
+    React.useEffect(function () {
+        mocks_1.getAFHs.then(function (AFHs) { return dispatch(afhSlice_1.add(AFHs)); });
+    }, []);
     return (React.createElement(App_styles_1.StyledApp, null,
         React.createElement(Taskbar_1.default, null),
-        React.createElement(NameList_1.default, null)));
+        tasks.clients ? React.createElement(NameList_1.default, null) : tasks.housing ? React.createElement(Apartments_1.default, null) : React.createElement(AFH_1.default, null)));
 };
 exports.default = App;
+
+
+/***/ }),
+
+/***/ "./src/Components/AFH/AFH.styles.ts":
+/*!******************************************!*\
+  !*** ./src/Components/AFH/AFH.styles.ts ***!
+  \******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.StyledAFH = void 0;
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+exports.StyledAFH = styled_components_1.default('div')(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
+var templateObject_1;
+
+
+/***/ }),
+
+/***/ "./src/Components/AFH/AFH.tsx":
+/*!************************************!*\
+  !*** ./src/Components/AFH/AFH.tsx ***!
+  \************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var AFH_styles_1 = __webpack_require__(/*! ./AFH.styles */ "./src/Components/AFH/AFH.styles.ts");
+var AFH = function () {
+    return (react_1.default.createElement(AFH_styles_1.StyledAFH, null));
+};
+exports.default = AFH;
+
+
+/***/ }),
+
+/***/ "./src/Components/Apartments/Apartments.styles.ts":
+/*!********************************************************!*\
+  !*** ./src/Components/Apartments/Apartments.styles.ts ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.StyledApartments = void 0;
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+exports.StyledApartments = styled_components_1.default('div')(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
+var templateObject_1;
+
+
+/***/ }),
+
+/***/ "./src/Components/Apartments/Apartments.tsx":
+/*!**************************************************!*\
+  !*** ./src/Components/Apartments/Apartments.tsx ***!
+  \**************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var Apartments_styles_1 = __webpack_require__(/*! ./Apartments.styles */ "./src/Components/Apartments/Apartments.styles.ts");
+var Apartments = function () {
+    return (react_1.default.createElement(Apartments_styles_1.StyledApartments, null));
+};
+exports.default = Apartments;
 
 
 /***/ }),
@@ -43319,7 +43423,7 @@ var NameList = function () {
             ", ",
             name.first));
     });
-    return (React.createElement(NameList_styles_1.StyledNameList, { onClick: function () { return console.log(names); } }, nameList));
+    return (React.createElement(NameList_styles_1.StyledNameList, null, nameList));
 };
 exports.default = NameList;
 
@@ -43388,6 +43492,84 @@ var Taskbar = function () {
             react_1.default.createElement(fa_1.FaHospitalAlt, null))));
 };
 exports.default = Taskbar;
+
+
+/***/ }),
+
+/***/ "./src/Store/Slices/afhSlice.ts":
+/*!**************************************!*\
+  !*** ./src/Store/Slices/afhSlice.ts ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.remove = exports.add = void 0;
+var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+var initialState = [];
+var AFHSlice = toolkit_1.createSlice({
+    name: 'afh',
+    initialState: initialState,
+    reducers: {
+        add: function (state, action) {
+            if (Array.isArray(action.payload)) {
+                action.payload.forEach(function (afh) {
+                    state.push(afh);
+                });
+            }
+            else {
+                state.push(action.payload);
+            }
+        },
+        remove: function (state, action) {
+            state = state.filter(function (afh) { return afh !== action.payload; });
+            return state;
+        }
+    }
+});
+var actions = AFHSlice.actions, reducer = AFHSlice.reducer;
+exports.add = actions.add, exports.remove = actions.remove;
+exports.default = reducer;
+
+
+/***/ }),
+
+/***/ "./src/Store/Slices/apartmentSlice.ts":
+/*!********************************************!*\
+  !*** ./src/Store/Slices/apartmentSlice.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.remove = exports.add = exports.apartmentSlice = void 0;
+var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+var initialState = [];
+exports.apartmentSlice = toolkit_1.createSlice({
+    name: 'apartments',
+    initialState: initialState,
+    reducers: {
+        add: function (state, action) {
+            if (Array.isArray(action.payload)) {
+                action.payload.forEach(function (apt) {
+                    state.push(apt);
+                });
+            }
+            else {
+                state.push(action.payload);
+            }
+        },
+        remove: function (state, action) {
+            state = state.filter(function (apt) { return apt !== action.payload; });
+            return state;
+        }
+    }
+});
+var actions = exports.apartmentSlice.actions, reducer = exports.apartmentSlice.reducer;
+exports.add = actions.add, exports.remove = actions.remove;
+exports.default = reducer;
 
 
 /***/ }),
@@ -43466,11 +43648,12 @@ var initialState = {
 };
 exports.taskSlice = toolkit_1.createSlice({
     name: 'tasks',
-    initialState: initialState,
+    initialState: __assign(__assign({}, initialState), { 'clients': true }),
     reducers: {
         toggle: function (state, action) {
             var _a;
             state = __assign(__assign({}, initialState), (_a = {}, _a[action.payload] = true, _a));
+            return state;
         }
     },
 });
@@ -43498,10 +43681,14 @@ var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@red
 var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 var clientSlice_1 = __importDefault(__webpack_require__(/*! ./Slices/clientSlice */ "./src/Store/Slices/clientSlice.ts"));
 var taskSlice_1 = __importDefault(__webpack_require__(/*! ./Slices/taskSlice */ "./src/Store/Slices/taskSlice.ts"));
+var apartmentSlice_1 = __importDefault(__webpack_require__(/*! ./Slices/apartmentSlice */ "./src/Store/Slices/apartmentSlice.ts"));
+var afhSlice_1 = __importDefault(__webpack_require__(/*! ./Slices/afhSlice */ "./src/Store/Slices/afhSlice.ts"));
 var store = toolkit_1.configureStore({
     reducer: {
         clients: clientSlice_1.default,
-        tasks: taskSlice_1.default
+        tasks: taskSlice_1.default,
+        apartments: apartmentSlice_1.default,
+        afhs: afhSlice_1.default
     }
 });
 exports.default = store;
@@ -43520,7 +43707,7 @@ exports.useAppDispatch = useAppDispatch;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getApartments = exports.getNames = void 0;
+exports.getAFHs = exports.getApartments = exports.getNames = void 0;
 exports.getNames = new Promise(function (resolve) {
     setTimeout(function () {
         resolve([{ id: 1, first: 'John', last: 'Doe' }, { id: 2, first: 'Howard', last: 'Haws' }, { id: 3, first: 'Maggie', last: 'Lane' }]);
@@ -43529,7 +43716,13 @@ exports.getNames = new Promise(function (resolve) {
 //! fake api call for apartments
 exports.getApartments = new Promise(function (resolve) {
     setTimeout(function () {
-        resolve([{ name: 'Jay\'s Place' }, { name: 'Evergreen Place' }, { name: 'Senior Villa' }]);
+        resolve([{ id: 1, name: 'Jay\'s Place' }, { id: 2, name: 'Evergreen Place' }, { id: 3, name: 'Senior Villa' }]);
+    }, 2000);
+});
+//! fake api call for AFHs
+exports.getAFHs = new Promise(function (resolve) {
+    setTimeout(function () {
+        resolve([{ id: 1, name: 'Allegre Villa' }, { id: 2, name: 'The Boardwalk' }, { id: 3, name: 'Hidden Firs' }]);
     }, 2000);
 });
 

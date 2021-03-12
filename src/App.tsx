@@ -9,6 +9,8 @@ import { add as clientAdd } from './Store/Slices/clientSlice'
 import { add as apartmentAdd } from './Store/Slices/apartmentSlice'
 import { add as afhAdd } from './Store/Slices/afhSlice'
 import { useSelector } from 'react-redux'
+import  Apts from './Components/Apartments/Apartments'
+import AFH from './Components/AFH/AFH'
 
 
 const App = () => {
@@ -27,12 +29,10 @@ const App = () => {
         getAFHs.then((AFHs: AFHs[]) => dispatch(afhAdd(AFHs)))
     }, [])
 
-
-
     return (
         <StyledApp>
             <Taskbar />
-            {tasks.clients && <NameList />}
+            {tasks.clients ? <NameList /> : tasks.housing ? <Apts /> : <AFH />}
         </StyledApp>
     )
 }

@@ -106,11 +106,11 @@ var MainWindow = /** @class */ (function () {
     MainWindow.prototype.onClose = function () {
         this.window = null;
     };
-    MainWindow.prototype.createWindow = function (mode) {
+    MainWindow.prototype.createWindow = function () {
         var _this = this;
         this.window = new electron_1.BrowserWindow(__assign({}, defaultProps));
         this.window.loadURL(electron_is_dev_1.default ? 'http://localhost:9000/' : "file://" + this.App.getAppPath() + "/index.html");
-        mode !== 'prod' && this.window.webContents.openDevTools();
+        electron_is_dev_1.default && this.window.webContents.openDevTools();
         this.window.on('ready-to-show', function () { var _a; return (_a = _this.window) === null || _a === void 0 ? void 0 : _a.show(); });
         this.window.on('closed', this.onClose);
     };
@@ -120,8 +120,7 @@ var MainWindow = /** @class */ (function () {
             event.reply('test-message-reply', 'pong');
         });
     };
-    MainWindow.prototype.start = function (mode) {
-        if (mode === void 0) { mode = 'dev'; }
+    MainWindow.prototype.start = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
@@ -129,12 +128,12 @@ var MainWindow = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.App.whenReady()];
                     case 1:
                         _a.sent();
-                        this.createWindow(mode);
+                        this.createWindow();
                         this.messaging();
                         this.App.on('window-all-closed', this.onWindowAllClosed);
                         this.App.on('activate', function () {
                             if (electron_1.BrowserWindow.getAllWindows.length === 0) {
-                                _this.createWindow(mode);
+                                _this.createWindow();
                             }
                         });
                         return [2 /*return*/];
@@ -163,7 +162,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var electron_1 = __webpack_require__(/*! electron */ "electron");
 var Main_1 = __importDefault(__webpack_require__(/*! ./Electron/Main/Main */ "./src/Electron/Main/Main.ts"));
 var MAIN = new Main_1.default(electron_1.app);
-MAIN.start('dev');
+MAIN.start();
 
 
 /***/ }),
